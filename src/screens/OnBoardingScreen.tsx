@@ -68,8 +68,6 @@ const styles = StyleSheet.create({
   },
   swiperContainer: {
     flex: 1,
-    height: '100%',
-    alignSelf: 'center',
   },
   containerBottomSection: {
     width: '80%',

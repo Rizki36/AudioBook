@@ -23,9 +23,9 @@ const SwiperItem: FC<SwiperItemType> = ({illustration, title, desc}) => {
 const styles = StyleSheet.create({
   itemSwiper: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
-    // backgroundColor: 'black',
+    paddingBottom: 40,
   },
   itemTitle: {
     textAlign: 'center',

@@ -1,6 +1,12 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React, {FC, useRef, useState} from 'react';
-import {Animated, FlatListProps, StyleSheet, View} from 'react-native';
+import {
+  Animated,
+  FlatList,
+  FlatListProps,
+  StyleSheet,
+  View,
+} from 'react-native';
 import Accent from '../components/OnBoarding/Accent';
 import BottomSection from '../components/OnBoarding/BottomSection';
 import Swiper from '../components/OnBoarding/Swiper';
@@ -29,9 +35,10 @@ const onboardingItems: OnboardingItemType[] = [
   },
 ];
 
-const OnBoardingScreen: FC<Props> = () => {
+const OnBoardingScreen: FC<Props> = ({navigation}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
+  const swiperRef = useRef<FlatList<OnboardingItemType>>(null);
 
   const viewableItemsChanged = useRef<
     FlatListProps<OnboardingItemType>['onViewableItemsChanged']
@@ -39,12 +46,27 @@ const OnBoardingScreen: FC<Props> = () => {
     setCurrentIndex(viewableItems[0].index ?? 0);
   }).current;
 
+  const onClickNext = () => {
+    if (onboardingItems.length === currentIndex + 1) {
+      navigation.replace('Home');
+    } else {
+      swiperRef.current?.scrollToIndex({
+        index: currentIndex + 1,
+      });
+    }
+  };
+
+  const onClickSkip = () => {
+    navigation.replace('Home');
+  };
+
   return (
     <>
       <Accent />
       <View style={styles.container}>
         <View style={styles.swiperContainer}>
           <Swiper
+            ref={swiperRef}
             onboardingItems={onboardingItems}
             scrollX={scrollX}
             viewableItemsChanged={viewableItemsChanged}
@@ -54,6 +76,8 @@ const OnBoardingScreen: FC<Props> = () => {
           <BottomSection
             onBoardingLength={onboardingItems.length}
             activeIndex={currentIndex}
+            onClickNext={onClickNext}
+            onClickSkip={onClickSkip}
           />
         </View>
       </View>

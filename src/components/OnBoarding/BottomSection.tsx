@@ -5,10 +5,14 @@ import Button from '../General/Button';
 type BottomSectionType = {
   activeIndex: number;
   onBoardingLength: number;
+  onClickNext: () => any;
+  onClickSkip: () => any;
 };
 const BottomSection: FC<BottomSectionType> = ({
   activeIndex,
   onBoardingLength,
+  onClickNext,
+  onClickSkip,
 }) => {
   const indicators = useMemo(() => {
     const arrayLength = [...Array(onBoardingLength).keys()];
@@ -28,10 +32,17 @@ const BottomSection: FC<BottomSectionType> = ({
       <View style={styles.containerAction}>
         <Button
           pressableStyle={{backgroundColor: 'none', flex: 1}}
-          textStyle={{color: '#4838D1'}}>
+          textStyle={{color: '#4838D1'}}
+          pressableProps={{onPress: onClickSkip}}>
           Skip
         </Button>
-        <Button pressableStyle={{flex: 1}}>Next</Button>
+        <Button
+          pressableStyle={{flex: 1}}
+          pressableProps={{
+            onPress: onClickNext,
+          }}>
+          Next
+        </Button>
       </View>
     </View>
   );

@@ -1,17 +1,35 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import React, {FC, useEffect} from 'react';
+import React, {FC, useCallback, useEffect} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {RootStackParamList} from '../types';
 const logoImg = require('../assets/splashscreen/logo.png');
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {KEY_VIEWED_ONBOARDING} from '../constants';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Splash'>;
 
 const SplashScreen: FC<Props> = ({navigation}) => {
+  const handleNextScreen = useCallback(async () => {
+    try {
+      const isViewed = await AsyncStorage.getItem(KEY_VIEWED_ONBOARDING);
+      if (isViewed) {
+        navigation.push('Home');
+        return;
+      }
+
+      navigation.push('OnBoarding');
+    } catch (error) {
+      console.error(error);
+      navigation.push('OnBoarding');
+    }
+  }, [navigation]);
+
   useEffect(() => {
     setTimeout(() => {
-      navigation.push('OnBoarding');
+      handleNextScreen();
     }, 1000);
-  }, [navigation]);
+  }, [handleNextScreen]);
+
   return (
     <View style={styles.container}>
       <View style={styles.constainerImage}>

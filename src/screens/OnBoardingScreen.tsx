@@ -11,6 +11,8 @@ import Accent from '../components/OnBoarding/Accent';
 import BottomSection from '../components/OnBoarding/BottomSection';
 import Swiper from '../components/OnBoarding/Swiper';
 import {OnboardingItemType, RootStackParamList} from '../types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {KEY_VIEWED_ONBOARDING} from '../constants';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'OnBoarding'>;
 
@@ -46,9 +48,19 @@ const OnBoardingScreen: FC<Props> = ({navigation}) => {
     setCurrentIndex(viewableItems[0].index ?? 0);
   }).current;
 
-  const onClickNext = () => {
-    if (onboardingItems.length === currentIndex + 1) {
+  const handleNextScreen = async () => {
+    try {
+      await AsyncStorage.setItem(KEY_VIEWED_ONBOARDING, 'true');
+
       navigation.replace('Home');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const onClickNext = async () => {
+    if (onboardingItems.length === currentIndex + 1) {
+      handleNextScreen();
     } else {
       swiperRef.current?.scrollToIndex({
         index: currentIndex + 1,

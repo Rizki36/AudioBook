@@ -11,7 +11,11 @@ const RootStack = createNativeStackNavigator<RootStackParamList>();
 const App = () => {
   return (
     <NavigationContainer>
-      <RootStack.Navigator>
+      <RootStack.Navigator
+        screenOptions={{
+          gestureEnabled: false,
+          animation: 'fade',
+        }}>
         <RootStack.Screen
           options={{headerShown: false}}
           name="Splash"

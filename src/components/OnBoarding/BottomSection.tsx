@@ -1,23 +1,30 @@
-import React, {FC} from 'react';
+import React, {FC, useMemo} from 'react';
 import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 import Button from '../General/Button';
 
 type BottomSectionType = {
   activeIndex: number;
+  onBoardingLength: number;
 };
-const BottomSection: FC<BottomSectionType> = ({activeIndex}) => {
+const BottomSection: FC<BottomSectionType> = ({
+  activeIndex,
+  onBoardingLength,
+}) => {
+  const indicators = useMemo(() => {
+    const arrayLength = [...Array(onBoardingLength).keys()];
+
+    return arrayLength.map((_, index) => (
+      <IndicatorItem
+        key={index}
+        active={activeIndex === index}
+        style={{...(onBoardingLength !== index && {marginRight: 12})}}
+      />
+    ));
+  }, [onBoardingLength, activeIndex]);
   return (
     <View style={{marginTop: 40}}>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'center',
-          marginBottom: 40,
-        }}>
-        <IndicatorItem active={activeIndex === 0} style={{marginRight: 12}} />
-        <IndicatorItem active={activeIndex === 1} style={{marginRight: 12}} />
-        <IndicatorItem active={activeIndex === 2} />
-      </View>
+      <View style={styles.indicatorContainer}>{indicators}</View>
+
       <View style={styles.containerAction}>
         <Button
           pressableStyle={{backgroundColor: 'none', flex: 1}}
@@ -30,6 +37,19 @@ const BottomSection: FC<BottomSectionType> = ({activeIndex}) => {
   );
 };
 
+const styles = StyleSheet.create({
+  containerAction: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: 80,
+  },
+  indicatorContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: 40,
+  },
+});
+
 const IndicatorItem: FC<{
   active?: boolean;
   style?: StyleProp<ViewStyle>;
@@ -37,11 +57,9 @@ const IndicatorItem: FC<{
   return (
     <View
       style={[
+        indicatorItemStyle.container,
         {
-          height: 12,
-          width: 12,
-          borderRadius: 12,
-          backgroundColor: active ? '#F77A55' : '#7466E3',
+          ...(active && indicatorItemStyle.active),
         },
         style,
       ]}
@@ -49,11 +67,15 @@ const IndicatorItem: FC<{
   );
 };
 
-const styles = StyleSheet.create({
-  containerAction: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginBottom: 80,
+const indicatorItemStyle = StyleSheet.create({
+  container: {
+    height: 12,
+    width: 12,
+    borderRadius: 12,
+    backgroundColor: '#7466E3',
+  },
+  active: {
+    backgroundColor: '#F77A55',
   },
 });
 

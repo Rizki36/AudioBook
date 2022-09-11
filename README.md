@@ -54,5 +54,8 @@ This project just for learning React Native :)
 
 - [x] Splash Screen
 - [x] OnBoarding Screen
+- [ ] Login
+- [ ] Sign Up
+- [ ] Forgot Password
 - [ ] Home Screen
 - [ ] ...

@@ -7,7 +7,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import Accent from '../components/OnBoarding/Accent';
+import Accent from '../components/General/Accent';
 import BottomSection from '../components/OnBoarding/BottomSection';
 import Swiper from '../components/OnBoarding/Swiper';
 import {OnboardingItemType, RootStackParamList} from '../types';

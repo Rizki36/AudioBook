@@ -1,20 +1,27 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
+import OnBoardingScreen from './src/screens/OnBoardingScreen';
 import SplashScreen from './src/screens/SplashScreen';
+import {RootStackParamList} from './src/types';
 
-const Stack = createNativeStackNavigator();
+const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
+      <RootStack.Navigator>
+        <RootStack.Screen
           options={{headerShown: false}}
-          name="Home"
+          name="Splash"
           component={SplashScreen}
         />
-      </Stack.Navigator>
+        <RootStack.Screen
+          options={{headerShown: false}}
+          name="OnBoarding"
+          component={OnBoardingScreen}
+        />
+      </RootStack.Navigator>
     </NavigationContainer>
   );
 };

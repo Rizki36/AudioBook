@@ -1,8 +1,17 @@
-import React from 'react';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import React, {FC, useEffect} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
+import {RootStackParamList} from '../types';
 const logoImg = require('../assets/splashscreen/logo.png');
 
-const SplashScreen = () => {
+type Props = NativeStackScreenProps<RootStackParamList, 'Splash'>;
+
+const SplashScreen: FC<Props> = ({navigation}) => {
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.push('OnBoarding');
+    }, 1000);
+  }, [navigation]);
   return (
     <View style={styles.container}>
       <View style={styles.constainerImage}>

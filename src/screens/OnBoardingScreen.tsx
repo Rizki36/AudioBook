@@ -13,6 +13,8 @@ import Swiper from '../components/OnBoarding/Swiper';
 import {OnboardingItemType, RootStackParamList} from '../types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {KEY_VIEWED_ONBOARDING} from '../constants';
+import {useDispatch} from 'react-redux';
+import {setViewedOnBoarding} from '../app/slices/AuthSlice';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'OnBoarding'>;
 
@@ -37,10 +39,12 @@ const onboardingItems: OnboardingItemType[] = [
   },
 ];
 
-const OnBoardingScreen: FC<Props> = ({navigation}) => {
+const OnBoardingScreen: FC<Props> = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const swiperRef = useRef<FlatList<OnboardingItemType>>(null);
+
+  const dispatch = useDispatch();
 
   const viewableItemsChanged = useRef<
     FlatListProps<OnboardingItemType>['onViewableItemsChanged']
@@ -52,7 +56,7 @@ const OnBoardingScreen: FC<Props> = ({navigation}) => {
     try {
       await AsyncStorage.setItem(KEY_VIEWED_ONBOARDING, 'true');
 
-      navigation.replace('Home');
+      dispatch(setViewedOnBoarding(true));
     } catch (error) {
       console.error(error);
     }
@@ -69,7 +73,7 @@ const OnBoardingScreen: FC<Props> = ({navigation}) => {
   };
 
   const onClickSkip = () => {
-    navigation.replace('Home');
+    dispatch(setViewedOnBoarding(true));
   };
 
   return (

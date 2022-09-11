@@ -1,7 +1,7 @@
 export type RootStackParamList = {
-  Splash: undefined;
   OnBoarding: undefined;
   Home: undefined;
+  Login: undefined;
 };
 
 export type OnboardingItemType = {

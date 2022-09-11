@@ -25,23 +25,29 @@ const BottomSection: FC<BottomSectionType> = ({
       />
     ));
   }, [onBoardingLength, activeIndex]);
+
+  const isLastStep = activeIndex + 1 === onBoardingLength;
+
   return (
     <View style={{marginTop: 40}}>
       <View style={styles.indicatorContainer}>{indicators}</View>
 
       <View style={styles.containerAction}>
-        <Button
-          pressableStyle={{backgroundColor: 'none', flex: 1}}
-          textStyle={{color: '#4838D1'}}
-          pressableProps={{onPress: onClickSkip}}>
-          Skip
-        </Button>
+        {!isLastStep && (
+          <Button
+            pressableStyle={{backgroundColor: 'none', flex: 1}}
+            textStyle={{color: '#4838D1'}}
+            pressableProps={{onPress: onClickSkip}}>
+            Skip
+          </Button>
+        )}
+
         <Button
           pressableStyle={{flex: 1}}
           pressableProps={{
             onPress: onClickNext,
           }}>
-          Next
+          {isLastStep ? 'Lets Get Started' : 'Next'}
         </Button>
       </View>
     </View>

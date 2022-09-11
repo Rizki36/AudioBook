@@ -27,7 +27,7 @@ const SplashScreen: FC<Props> = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
       handleNextScreen();
-    }, 1000);
+    }, 250);
   }, [handleNextScreen]);
 
   return (

@@ -1,18 +1,17 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React, {FC} from 'react';
-import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
-import {userLogin, userLogout} from '@app/app/slices/AuthSlice';
-import {useAppDispatch} from '../app/store';
-import {RootStackParamList} from '../types';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import ControlledInput from '@app/components/General/ControlledInput';
 import {useForm} from 'react-hook-form';
+import Button from '@app/components/General/Button';
 const logoImg = require('@app/assets/general/logo.png');
+
+import type {RootStackParamList} from '@app/types';
+import CheckBox from '@app/components/General/CheckBox';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
 const LoginScreen: FC<Props> = ({}) => {
-  const dispatch = useAppDispatch();
-
   const {control} = useForm({
     defaultValues: {
       email: '',
@@ -41,20 +40,18 @@ const LoginScreen: FC<Props> = ({}) => {
             placeholder: 'Password',
           }}
         />
+        <View>
+          <CheckBox title="Remember me" />
+        </View>
+        <Button
+          pressableProps={{
+            onPress: () => {
+              console.warn('hai');
+            },
+          }}>
+          Login
+        </Button>
       </View>
-
-      <Pressable
-        onPress={async () => {
-          await dispatch(userLogin());
-        }}>
-        <Text>Login</Text>
-      </Pressable>
-      <Pressable
-        onPress={async () => {
-          await dispatch(userLogout());
-        }}>
-        <Text>Reset</Text>
-      </Pressable>
     </View>
   );
 };

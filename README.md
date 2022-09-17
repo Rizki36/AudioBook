@@ -46,15 +46,18 @@ This project just for learning React Native :)
 
 <!-- USAGE EXAMPLES -->
 ## ScreenShot
-<img src="https://user-images.githubusercontent.com/39044004/189529549-7b3c0abb-ee49-4727-b186-eef823b95d68.png" width="300">
-
+<details>
+  <summary>Click to open</summary>
+  <img src="https://user-images.githubusercontent.com/39044004/189529549-7b3c0abb-ee49-4727-b186-eef823b95d68.png" width="300">
+  <img src="https://user-images.githubusercontent.com/39044004/190868211-89dd0816-a84d-4db6-af11-4c5940620906.png" width="300">
+</details>
 
 <!-- ROADMAP -->
 ## Roadmap
 
 - [x] Splash Screen
 - [x] OnBoarding Screen
-- [ ] Login
+- [x] Login
 - [ ] Sign Up
 - [ ] Forgot Password
 - [ ] Home Screen

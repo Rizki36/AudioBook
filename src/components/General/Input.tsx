@@ -1,6 +1,7 @@
+import type {InputType} from '@app/types';
 import React, {forwardRef} from 'react';
-import {View, ViewProps, ViewStyle} from 'react-native';
-import {TextInput, TextInputProps, StyleProp, TextStyle} from 'react-native';
+import {View, ViewStyle} from 'react-native';
+import {TextInput, StyleProp, TextStyle} from 'react-native';
 
 const defaultInputStyle: StyleProp<TextStyle> = {
   fontSize: 14,
@@ -16,24 +17,23 @@ const defaultContainerStyle: StyleProp<ViewStyle> = {
   marginBottom: 16,
 };
 
-const Input = forwardRef<
-  TextInput,
-  TextInputProps & {containerProps?: ViewProps}
->(({style, containerProps = {}, ...props}, ref) => {
-  const {style: containerStyle = {}, ...restContainerProps} = containerProps;
+const Input = forwardRef<TextInput, InputType>(
+  ({style, containerProps = {}, ...props}, ref) => {
+    const {style: containerStyle = {}, ...restContainerProps} = containerProps;
 
-  return (
-    <View
-      style={[defaultContainerStyle, containerStyle]}
-      {...restContainerProps}>
-      <TextInput
-        ref={ref}
-        style={[defaultInputStyle, style]}
-        placeholderTextColor="#B8B8C7"
-        {...props}
-      />
-    </View>
-  );
-});
+    return (
+      <View
+        style={[defaultContainerStyle, containerStyle]}
+        {...restContainerProps}>
+        <TextInput
+          ref={ref}
+          style={[defaultInputStyle, style]}
+          placeholderTextColor="#B8B8C7"
+          {...props}
+        />
+      </View>
+    );
+  },
+);
 
 export default Input;

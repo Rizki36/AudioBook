@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
-const logoImg = require('../assets/splashscreen/logo.png');
+const logoImg = require('@app/assets/general/logo.png');
 
 const SplashScreen: FC = () => {
   return (

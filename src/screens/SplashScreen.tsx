@@ -1,35 +1,8 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import React, {FC, useCallback, useEffect} from 'react';
+import React, {FC} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
-import {RootStackParamList} from '../types';
-const logoImg = require('../assets/splashscreen/logo.png');
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {KEY_VIEWED_ONBOARDING} from '../constants';
+const logoImg = require('@app/assets/general/logo.png');
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Splash'>;
-
-const SplashScreen: FC<Props> = ({navigation}) => {
-  const handleNextScreen = useCallback(async () => {
-    try {
-      const isViewed = await AsyncStorage.getItem(KEY_VIEWED_ONBOARDING);
-      if (isViewed) {
-        navigation.push('Home');
-        return;
-      }
-
-      navigation.push('OnBoarding');
-    } catch (error) {
-      console.error(error);
-      navigation.push('OnBoarding');
-    }
-  }, [navigation]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      handleNextScreen();
-    }, 250);
-  }, [handleNextScreen]);
-
+const SplashScreen: FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.constainerImage}>
@@ -46,6 +19,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: 30,
+    backgroundColor: '#FFF',
   },
   constainerImage: {
     flex: 1,

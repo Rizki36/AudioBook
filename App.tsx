@@ -12,13 +12,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {KEY_TOKEN, KEY_VIEWED_ONBOARDING} from './src/constants';
 import LoginScreen from './src/screens/LoginScreen';
 import {setToken, setViewedOnBoarding} from './src/app/slices/AuthSlice';
+import {ToastProvider} from 'react-native-toast-notifications';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 const App = () => {
   return (
     <Provider store={store}>
-      <Navigation />
+      <ToastProvider>
+        <Navigation />
+      </ToastProvider>
     </Provider>
   );
 };
@@ -64,8 +67,6 @@ const Navigation: FC = () => {
   if (isLoading || !afterMinDuration) {
     return <SplashScreen />;
   }
-
-  console.log(isLoading, token, isViewedOnBoarding);
 
   return (
     <NavigationContainer>

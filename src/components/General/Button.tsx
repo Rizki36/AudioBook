@@ -8,6 +8,7 @@ import {
   ViewStyle,
   StyleProp,
   TextStyle,
+  PressableStateCallbackType,
 } from 'react-native';
 
 const Button: FC<{
@@ -17,16 +18,16 @@ const Button: FC<{
   pressableStyle?: ViewStyle;
   textStyle?: StyleProp<TextStyle>;
 }> = ({pressableProps, textProps, pressableStyle, textStyle, children}) => {
+  const buttonStyle = ({pressed}: PressableStateCallbackType) => [
+    {
+      backgroundColor: pressed ? 'rgb(210, 230, 255)' : '#4838D1',
+    },
+    styles.button,
+    pressableStyle,
+  ];
+
   return (
-    <Pressable
-      style={({pressed}) => [
-        {
-          backgroundColor: pressed ? 'rgb(210, 230, 255)' : '#4838D1',
-        },
-        styles.button,
-        pressableStyle,
-      ]}
-      {...pressableProps}>
+    <Pressable style={buttonStyle} {...pressableProps}>
       {({}) => (
         <Text style={[styles.text, textStyle]} {...textProps}>
           {children}

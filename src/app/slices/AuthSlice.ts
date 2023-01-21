@@ -2,15 +2,21 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {KEY_TOKEN} from '../../constants';
+import deviceStorage from '@app/services/deviceStorage';
+import axiosInstance from '../axios';
 
-export interface AuthState {
+type userType = {id: string; email: string; name: string};
+
+export type AuthState = {
   token: string | null;
   viewedOnBoarding: boolean;
-}
+  user: userType | null;
+};
 
 const initialState: AuthState = {
   token: null,
   viewedOnBoarding: true,
+  user: null,
 };
 
 export const authSlice = createSlice({
@@ -29,7 +35,8 @@ export const authSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(userLogin.fulfilled, (state, action) => {
-      state.token = action.payload;
+      state.token = action.payload.token;
+      state.user = action.payload.user;
     });
 
     builder.addCase(userLogout.fulfilled, () => {
@@ -38,10 +45,26 @@ export const authSlice = createSlice({
   },
 });
 
-export const userLogin = createAsyncThunk('user/login', async () => {
-  const token = Math.random().toString();
-  await AsyncStorage.setItem(KEY_TOKEN, token);
-  return token;
+type postDataLogin = {
+  email: string;
+  password: string;
+};
+type responseDataLogin = {
+  token: string;
+  user: userType;
+};
+
+export const userLogin = createAsyncThunk<
+  responseDataLogin,
+  {data: postDataLogin}
+>('user/login', async ({data}) => {
+  const response = (await axiosInstance
+    .post('v1/auth/sign-in', data)
+    .then(async res => res?.data?.data)) as responseDataLogin;
+
+  await deviceStorage.setJWT(response.token);
+
+  return response;
 });
 
 export const userLogout = createAsyncThunk('user/logout', async () => {

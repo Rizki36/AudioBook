@@ -15,6 +15,9 @@ import ImageButton from '@app/components/General/ImageButton';
 import TextButton from '@app/components/General/TextButton';
 import {useAppDispatch} from '@app/app/store';
 import {userLogin} from '@app/app/slices/AuthSlice';
+import axios, {AxiosError} from 'axios';
+import {parseErrorMessage} from '@app/utils/parser/login';
+import {useToast} from 'react-native-toast-notifications';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
@@ -25,6 +28,7 @@ type TFieldValues = {
 
 const LoginScreen: FC<Props> = ({}) => {
   const dispatch = useAppDispatch();
+  const toast = useToast();
 
   const {control, handleSubmit} = useForm<TFieldValues>({
     defaultValues: {
@@ -34,11 +38,13 @@ const LoginScreen: FC<Props> = ({}) => {
   });
 
   const onSubmit = async (data: TFieldValues) => {
-    if (data.email === 'admin' && data.password) {
-      await dispatch(userLogin());
-    } else {
-      console.warn('u:admin, p:admin');
-    }
+    await dispatch(userLogin({data})).catch((error: Error | AxiosError) => {
+      if (axios.isAxiosError(error)) {
+        return toast.show(parseErrorMessage(error), {
+          type: 'danger',
+        });
+      }
+    });
   };
 
   return (

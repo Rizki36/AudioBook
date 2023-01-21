@@ -1,15 +1,19 @@
 import React, {FC, useRef, useState} from 'react';
 import CheckBoxCommunity from '@react-native-community/checkbox';
 import type {CheckBoxProps} from '@react-native-community/checkbox';
-import {Text, View} from 'react-native';
+import {StyleProp, Text, View, ViewStyle} from 'react-native';
 
 const CheckBox: FC<CheckBoxProps & {title?: string}> = ({title, ...props}) => {
   const checkboxRef = useRef<CheckBoxCommunity>(null);
   const [value, setValue] = useState(false);
 
+  const containerStyle: StyleProp<ViewStyle> = {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+  };
   return (
-    <View
-      style={{flexDirection: 'row', alignItems: 'center', marginBottom: 16}}>
+    <View style={containerStyle}>
       <CheckBoxCommunity
         value={value}
         onValueChange={_ => {

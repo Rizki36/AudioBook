@@ -3,7 +3,7 @@ import type {PayloadAction} from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {KEY_TOKEN} from '../../constants';
 import deviceStorage from '@app/services/deviceStorage';
-import axiosInstance from '../axios';
+import AuthService from '@app/services/AuthService';
 
 type userType = {id: string; email: string; name: string};
 
@@ -45,27 +45,21 @@ export const authSlice = createSlice({
   },
 });
 
-type postDataLogin = {
-  email: string;
-  password: string;
+type UserLoginPayload = {
+  data: {email: string; password: string};
 };
-type responseDataLogin = {
-  token: string;
-  user: userType;
-};
+export const userLogin = createAsyncThunk(
+  'user/login',
+  async ({data}: UserLoginPayload) => {
+    const response = await AuthService.postLogin({
+      data,
+    }).then(res => res.data.data);
 
-export const userLogin = createAsyncThunk<
-  responseDataLogin,
-  {data: postDataLogin}
->('user/login', async ({data}) => {
-  const response = (await axiosInstance
-    .post('v1/auth/sign-in', data)
-    .then(async res => res?.data?.data)) as responseDataLogin;
+    await deviceStorage.setJWT(response.token);
 
-  await deviceStorage.setJWT(response.token);
-
-  return response;
-});
+    return response;
+  },
+);
 
 export const userLogout = createAsyncThunk('user/logout', async () => {
   await AsyncStorage.removeItem(KEY_TOKEN);

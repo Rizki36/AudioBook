@@ -23,3 +23,5 @@ export interface ControlledProps<TFieldValues extends Record<string, any>> {
   };
   inputProps?: InputType;
 }
+
+export type User = {id: string; email: string; name: string};

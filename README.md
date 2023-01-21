@@ -37,6 +37,14 @@ This project just for learning React Native :)
    ```sh
    npm install
    ```
+4. Create environment
+   ```sh
+   touch .env
+   ```
+   add this to .env file
+   ```
+   REACT_APP_BASE_URL="https://audiobook-be.devfitra.com"
+   ```
 4. Run project
    ```sh
    npm run ios

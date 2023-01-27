@@ -13,11 +13,13 @@ import type {RootStackParamList} from '@app/types';
 import CheckBox from '@app/components/General/CheckBox';
 import ImageButton from '@app/components/General/ImageButton';
 import TextButton from '@app/components/General/TextButton';
-import {useAppDispatch} from '@app/app/store';
-import {userLogin} from '@app/app/slices/AuthSlice';
-import axios, {AxiosError} from 'axios';
+import axios from 'axios';
 import {parseErrorMessage} from '@app/utils/parser/login';
 import {useToast} from 'react-native-toast-notifications';
+import useLoginMutation from '@app/hooks/mutations/useLoginMutation';
+import deviceStorage from '@app/services/deviceStorage';
+import {tokenAtom} from '@app/atoms/auth';
+import {useSetAtom} from 'jotai';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
@@ -27,7 +29,8 @@ type TFieldValues = {
 };
 
 const LoginScreen: FC<Props> = ({}) => {
-  const dispatch = useAppDispatch();
+  const {mutate} = useLoginMutation({});
+  const setToken = useSetAtom(tokenAtom);
   const toast = useToast();
 
   const {control, handleSubmit} = useForm<TFieldValues>({
@@ -38,12 +41,18 @@ const LoginScreen: FC<Props> = ({}) => {
   });
 
   const onSubmit = async (data: TFieldValues) => {
-    await dispatch(userLogin({data})).catch((error: Error | AxiosError) => {
-      if (axios.isAxiosError(error)) {
-        return toast.show(parseErrorMessage(error), {
-          type: 'danger',
-        });
-      }
+    mutate(data, {
+      onSuccess: async res => {
+        setToken(res?.data?.token);
+        await deviceStorage.setJWT(res?.data?.token);
+      },
+      onError: error => {
+        if (axios.isAxiosError(error)) {
+          return toast.show(parseErrorMessage(error), {
+            type: 'danger',
+          });
+        }
+      },
     });
   };
 

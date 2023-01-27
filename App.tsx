@@ -6,23 +6,44 @@ import OnBoardingScreen from './src/screens/OnBoardingScreen';
 import SplashScreen from './src/screens/SplashScreen';
 import {RootStackParamList} from './src/types';
 
-import {RootState, store} from './src/app/store';
-import {Provider, useDispatch, useSelector} from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {KEY_TOKEN, KEY_VIEWED_ONBOARDING} from './src/constants';
 import LoginScreen from './src/screens/LoginScreen';
-import {setToken, setViewedOnBoarding} from './src/app/slices/AuthSlice';
 import {ToastProvider} from 'react-native-toast-notifications';
+import {useAtom} from 'jotai';
+import {tokenAtom, viewedOnBoardingAtom} from '@app/atoms/auth';
+import {AppStateStatus, Platform} from 'react-native';
+import {
+  focusManager,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
+import {useAppState} from '@app/hooks/useAppState';
+import {useOnlineManager} from '@app/hooks/useOnlineManager';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
+const onAppStateChange = (status: AppStateStatus) => {
+  // React Query already supports in web browser refetch on window focus by default
+  if (Platform.OS !== 'web') {
+    focusManager.setFocused(status === 'active');
+  }
+};
+
+const queryClient = new QueryClient({
+  defaultOptions: {queries: {retry: 2}},
+});
+
 const App = () => {
+  useOnlineManager();
+  useAppState(onAppStateChange);
+
   return (
-    <Provider store={store}>
+    <QueryClientProvider client={queryClient}>
       <ToastProvider>
         <Navigation />
       </ToastProvider>
-    </Provider>
+    </QueryClientProvider>
   );
 };
 
@@ -30,11 +51,9 @@ const Navigation: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [afterMinDuration, setAfterMinDuration] = useState(false);
 
-  const token = useSelector((state: RootState) => state.auth.token);
-  const isViewedOnBoarding = useSelector(
-    (state: RootState) => state.auth.viewedOnBoarding,
-  );
-  const dispatch = useDispatch();
+  const [token, setToken] = useAtom(tokenAtom);
+  const [isViewedOnBoarding, setIsViewedOnBoarding] =
+    useAtom(viewedOnBoardingAtom);
 
   useEffect(() => {
     (async () => {
@@ -45,11 +64,11 @@ const Navigation: FC = () => {
         ]);
 
         if (!localViewedOnBoarding) {
-          dispatch(setViewedOnBoarding(false));
+          setIsViewedOnBoarding(false);
         }
 
         if (localToken) {
-          dispatch(setToken(localToken));
+          setToken(localToken);
         }
 
         setTimeout(() => {

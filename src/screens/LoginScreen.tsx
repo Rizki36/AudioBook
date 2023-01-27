@@ -5,9 +5,9 @@ import ControlledInput from '@app/components/General/ControlledInput';
 import {useForm} from 'react-hook-form';
 import Button from '@app/components/General/Button';
 const logoImg = require('@app/assets/general/logo.png');
-const facebookImg = require('@app/assets/login/facebook.png');
-const googleImg = require('@app/assets/login/google.png');
-const twitterImg = require('@app/assets/login/twitter.png');
+const facebookImg = require('@app/modules/auth/login/assets/facebook.png');
+const googleImg = require('@app/modules/auth/login/assets/google.png');
+const twitterImg = require('@app/modules/auth/login/assets/twitter.png');
 
 import type {TRootStackParamList} from '@app/types';
 import CheckBox from '@app/components/General/CheckBox';

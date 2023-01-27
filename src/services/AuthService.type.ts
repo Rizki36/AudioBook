@@ -1,15 +1,15 @@
-import {User} from '@app/types';
+import {TUser} from '@app/types';
 
-export type PostLoginArgs = {
+export type TPostLoginArgs = {
   data: {
     email: string;
     password: string;
   };
 };
 
-export type PostLoginResponse = {
+export type TPostLoginResponse = {
   data: {
     token: string;
-    user: User;
+    user: TUser;
   };
 };

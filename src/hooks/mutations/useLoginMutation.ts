@@ -1,13 +1,16 @@
 import AuthService from '@app/services/AuthService';
-import {PostLoginArgs, PostLoginResponse} from '@app/services/AuthService.type';
+import {
+  TPostLoginArgs,
+  TPostLoginResponse,
+} from '@app/services/AuthService.type';
 import {useMutation, UseMutationOptions} from '@tanstack/react-query';
 
-type UseLoginMutationOptions = UseMutationOptions<
-  PostLoginResponse,
+type TUseLoginMutationOptions = UseMutationOptions<
+  TPostLoginResponse,
   unknown,
-  PostLoginArgs['data']
+  TPostLoginArgs['data']
 >;
-const useLoginMutation = (options: UseLoginMutationOptions) => {
+const useLoginMutation = (options: TUseLoginMutationOptions) => {
   return useMutation({
     mutationFn: async data => AuthService.postLogin({data}),
     ...options,

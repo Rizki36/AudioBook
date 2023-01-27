@@ -9,7 +9,7 @@ const facebookImg = require('@app/assets/login/facebook.png');
 const googleImg = require('@app/assets/login/google.png');
 const twitterImg = require('@app/assets/login/twitter.png');
 
-import type {RootStackParamList} from '@app/types';
+import type {TRootStackParamList} from '@app/types';
 import CheckBox from '@app/components/General/CheckBox';
 import ImageButton from '@app/components/General/ImageButton';
 import TextButton from '@app/components/General/TextButton';
@@ -21,14 +21,14 @@ import deviceStorage from '@app/services/deviceStorage';
 import {tokenAtom} from '@app/atoms/auth';
 import {useSetAtom} from 'jotai';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
+type TProps = NativeStackScreenProps<TRootStackParamList, 'Login'>;
 
 type TFieldValues = {
   email: string;
   password: string;
 };
 
-const LoginScreen: FC<Props> = ({}) => {
+const LoginScreen: FC<TProps> = ({}) => {
   const {mutate} = useLoginMutation({});
   const setToken = useSetAtom(tokenAtom);
   const toast = useToast();

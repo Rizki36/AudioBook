@@ -1,4 +1,4 @@
-import type {InputType} from '@app/types';
+import type {TInput} from '@app/types';
 import React, {forwardRef} from 'react';
 import {View, ViewStyle} from 'react-native';
 import {TextInput, StyleProp, TextStyle} from 'react-native';
@@ -17,7 +17,7 @@ const defaultContainerStyle: StyleProp<ViewStyle> = {
   marginBottom: 16,
 };
 
-const Input = forwardRef<TextInput, InputType>(
+const Input = forwardRef<TextInput, TInput>(
   ({style, containerProps = {}, ...props}, ref) => {
     const {style: containerStyle = {}, ...restContainerProps} = containerProps;
 

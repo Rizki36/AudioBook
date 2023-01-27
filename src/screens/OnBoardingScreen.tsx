@@ -23,19 +23,19 @@ const onboardingItems: TOnboardingItem[] = [
     id: '1',
     title: 'Tittle One',
     desc: 'Lorem ipsum dolor sit amet la maryame dor sut colondeum.',
-    illustration: require('../assets/onboarding/Illustration-1.png'),
+    illustration: require('@app/modules/auth/onboarding/assets/Illustration-1.png'),
   },
   {
     id: '2',
     title: 'Tittle Two',
     desc: 'Lorem ipsum dolor sit amet la maryame dor sut colondeum.',
-    illustration: require('../assets/onboarding/Illustration-2.png'),
+    illustration: require('@app/modules/auth/onboarding/assets/Illustration-2.png'),
   },
   {
     id: '3',
     title: 'Tittle Three',
     desc: 'Lorem ipsum dolor sit amet la maryame dor sut colondeum.',
-    illustration: require('../assets/onboarding/Illustration-3.png'),
+    illustration: require('@app/modules/auth/onboarding/assets/Illustration-3.png'),
   },
 ];
 

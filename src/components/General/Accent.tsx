@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, View} from 'react-native';
-const blueAccent = require('../../assets/onboarding/blue-accent.png');
-const orangeAccent = require('../../assets/onboarding/orange-accent.png');
+const blueAccent = require('@app/modules/auth/onboarding/assets/blue-accent.png');
+const orangeAccent = require('@app/modules/auth/onboarding/assets/orange-accent.png');
 
 const Accent = () => {
   return (

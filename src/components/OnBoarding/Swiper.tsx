@@ -1,14 +1,14 @@
 import React, {forwardRef} from 'react';
 import {Animated, FlatList, FlatListProps} from 'react-native';
-import {OnboardingItemType} from '../../types';
+import {TOnboardingItem} from '../../types';
 import SwiperItem from './SwiperItem';
 
-type SwiperType = {
+type TSwiper = {
   scrollX: Animated.Value;
-  viewableItemsChanged: FlatListProps<OnboardingItemType>['onViewableItemsChanged'];
-  onboardingItems: OnboardingItemType[];
+  viewableItemsChanged: FlatListProps<TOnboardingItem>['onViewableItemsChanged'];
+  onboardingItems: TOnboardingItem[];
 };
-const Swiper = forwardRef<FlatList<OnboardingItemType>, SwiperType>(
+const Swiper = forwardRef<FlatList<TOnboardingItem>, TSwiper>(
   ({scrollX, onboardingItems, viewableItemsChanged}, ref) => {
     return (
       <FlatList

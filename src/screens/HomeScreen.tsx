@@ -4,11 +4,11 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useSetAtom} from 'jotai';
 import React, {FC} from 'react';
 import {Pressable, Text, View} from 'react-native';
-import {RootStackParamList} from '../types';
+import {TRootStackParamList} from '../types';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+type TProps = NativeStackScreenProps<TRootStackParamList, 'Home'>;
 
-const HomeScreen: FC<Props> = () => {
+const HomeScreen: FC<TProps> = () => {
   const setToken = useSetAtom(tokenAtom);
 
   const logout = async () => {

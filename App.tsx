@@ -4,7 +4,7 @@ import React, {FC, useEffect, useState} from 'react';
 import HomeScreen from './src/screens/HomeScreen';
 import OnBoardingScreen from './src/screens/OnBoardingScreen';
 import SplashScreen from './src/screens/SplashScreen';
-import {RootStackParamList} from './src/types';
+import {TRootStackParamList} from './src/types';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {KEY_TOKEN, KEY_VIEWED_ONBOARDING} from './src/constants';
@@ -21,7 +21,7 @@ import {
 import {useAppState} from '@app/hooks/useAppState';
 import {useOnlineManager} from '@app/hooks/useOnlineManager';
 
-const RootStack = createNativeStackNavigator<RootStackParamList>();
+const RootStack = createNativeStackNavigator<TRootStackParamList>();
 
 const onAppStateChange = (status: AppStateStatus) => {
   // React Query already supports in web browser refetch on window focus by default

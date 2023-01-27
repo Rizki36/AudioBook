@@ -10,15 +10,15 @@ import {
 import Accent from '../components/General/Accent';
 import BottomSection from '../components/OnBoarding/BottomSection';
 import Swiper from '../components/OnBoarding/Swiper';
-import {OnboardingItemType, RootStackParamList} from '../types';
+import {TOnboardingItem, TRootStackParamList} from '../types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {KEY_VIEWED_ONBOARDING} from '../constants';
 import {viewedOnBoardingAtom} from '@app/atoms/auth';
 import {useSetAtom} from 'jotai';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'OnBoarding'>;
+type TProps = NativeStackScreenProps<TRootStackParamList, 'OnBoarding'>;
 
-const onboardingItems: OnboardingItemType[] = [
+const onboardingItems: TOnboardingItem[] = [
   {
     id: '1',
     title: 'Tittle One',
@@ -39,14 +39,14 @@ const onboardingItems: OnboardingItemType[] = [
   },
 ];
 
-const OnBoardingScreen: FC<Props> = () => {
+const OnBoardingScreen: FC<TProps> = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
-  const swiperRef = useRef<FlatList<OnboardingItemType>>(null);
+  const swiperRef = useRef<FlatList<TOnboardingItem>>(null);
   const setViewedOnBoarding = useSetAtom(viewedOnBoardingAtom);
 
   const viewableItemsChanged = useRef<
-    FlatListProps<OnboardingItemType>['onViewableItemsChanged']
+    FlatListProps<TOnboardingItem>['onViewableItemsChanged']
   >(({viewableItems}) => {
     setCurrentIndex(viewableItems[0].index ?? 0);
   }).current;

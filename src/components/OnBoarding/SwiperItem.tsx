@@ -1,12 +1,12 @@
 import React, {FC} from 'react';
 import {Image, StyleSheet, Text, useWindowDimensions, View} from 'react-native';
 
-type SwiperItemType = {
+type TSwiperItem = {
   illustration: any;
   title: string;
   desc: string;
 };
-const SwiperItem: FC<SwiperItemType> = ({illustration, title, desc}) => {
+const SwiperItem: FC<TSwiperItem> = ({illustration, title, desc}) => {
   const {width} = useWindowDimensions();
 
   return (

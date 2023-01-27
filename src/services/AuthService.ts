@@ -1,10 +1,10 @@
 import axiosInstance from '@app/app/axios';
-import {PostLoginArgs, PostLoginResponse} from './AuthService.type';
+import {TPostLoginArgs, TPostLoginResponse} from './AuthService.type';
 
 const AuthService = {
-  postLogin: (args: PostLoginArgs) => {
+  postLogin: (args: TPostLoginArgs) => {
     return axiosInstance
-      .post<PostLoginResponse>('v1/auth/sign-in', args.data)
+      .post<TPostLoginResponse>('v1/auth/sign-in', args.data)
       .then(res => res.data);
   },
 };

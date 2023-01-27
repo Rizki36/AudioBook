@@ -2,13 +2,13 @@ import React, {FC, useMemo} from 'react';
 import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 import Button from '../General/Button';
 
-type BottomSectionType = {
+type TBottomSection = {
   activeIndex: number;
   onBoardingLength: number;
   onClickNext: () => any;
   onClickSkip: () => any;
 };
-const BottomSection: FC<BottomSectionType> = ({
+const BottomSection: FC<TBottomSection> = ({
   activeIndex,
   onBoardingLength,
   onClickNext,

@@ -18,8 +18,8 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
-import {useAppState} from '@app/hooks/useAppState';
-import {useOnlineManager} from '@app/hooks/useOnlineManager';
+import {useAppState} from '@app/common/hooks/useAppState';
+import {useOnlineManager} from '@app/common/hooks/useOnlineManager';
 
 const RootStack = createNativeStackNavigator<TRootStackParamList>();
 

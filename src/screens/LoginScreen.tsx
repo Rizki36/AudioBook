@@ -18,7 +18,7 @@ import {parseErrorMessage} from '@app/utils/parser/login';
 import {useToast} from 'react-native-toast-notifications';
 import useLoginMutation from '@app/hooks/mutations/useLoginMutation';
 import deviceStorage from '@app/common/services/deviceStorage';
-import {tokenAtom} from '@app/atoms/auth';
+import {tokenAtom} from '@app/common/atoms/auth';
 import {useSetAtom} from 'jotai';
 
 type TProps = NativeStackScreenProps<TRootStackParamList, 'Login'>;

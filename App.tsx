@@ -11,7 +11,7 @@ import {KEY_TOKEN, KEY_VIEWED_ONBOARDING} from './src/constants';
 import LoginScreen from './src/screens/LoginScreen';
 import {ToastProvider} from 'react-native-toast-notifications';
 import {useAtom} from 'jotai';
-import {tokenAtom, viewedOnBoardingAtom} from '@app/atoms/auth';
+import {tokenAtom, viewedOnBoardingAtom} from '@app/common/atoms/auth';
 import {AppStateStatus, Platform} from 'react-native';
 import {
   focusManager,

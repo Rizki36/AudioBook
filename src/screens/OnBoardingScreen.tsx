@@ -13,7 +13,7 @@ import Swiper from '../components/OnBoarding/Swiper';
 import {TOnboardingItem, TRootStackParamList} from '../types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {KEY_VIEWED_ONBOARDING} from '../constants';
-import {viewedOnBoardingAtom} from '@app/atoms/auth';
+import {viewedOnBoardingAtom} from '@app/common/atoms/auth';
 import {useSetAtom} from 'jotai';
 
 type TProps = NativeStackScreenProps<TRootStackParamList, 'OnBoarding'>;

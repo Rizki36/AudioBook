@@ -1,4 +1,4 @@
-import {tokenAtom} from '@app/atoms/auth';
+import {tokenAtom} from '@app/common/atoms/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useSetAtom} from 'jotai';

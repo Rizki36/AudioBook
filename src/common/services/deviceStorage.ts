@@ -1,4 +1,4 @@
-import {KEY_TOKEN} from '@app/constants';
+import {KEY_TOKEN} from '@app/common/constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const deviceStorage = {

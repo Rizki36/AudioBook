@@ -7,7 +7,7 @@ import SplashScreen from './src/screens/SplashScreen';
 import {TRootStackParamList} from './src/types';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {KEY_TOKEN, KEY_VIEWED_ONBOARDING} from './src/constants';
+import {KEY_TOKEN, KEY_VIEWED_ONBOARDING} from './src/common/constants';
 import LoginScreen from './src/screens/LoginScreen';
 import {ToastProvider} from 'react-native-toast-notifications';
 import {useAtom} from 'jotai';

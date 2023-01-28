@@ -12,7 +12,7 @@ import BottomSection from '../components/OnBoarding/BottomSection';
 import Swiper from '../components/OnBoarding/Swiper';
 import {TOnboardingItem, TRootStackParamList} from '../types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {KEY_VIEWED_ONBOARDING} from '../constants';
+import {KEY_VIEWED_ONBOARDING} from '../common/constants';
 import {viewedOnBoardingAtom} from '@app/common/atoms/auth';
 import {useSetAtom} from 'jotai';
 

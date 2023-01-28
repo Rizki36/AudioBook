@@ -1,6 +1,6 @@
 import React, {FC, useMemo} from 'react';
 import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
-import Button from '../General/Button';
+import Button from '../../common/General/Button';
 
 type TBottomSection = {
   activeIndex: number;

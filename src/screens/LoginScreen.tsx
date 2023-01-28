@@ -1,18 +1,18 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React, {FC} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
-import ControlledInput from '@app/components/General/ControlledInput';
+import ControlledInput from '@app/common/General/ControlledInput';
 import {useForm} from 'react-hook-form';
-import Button from '@app/components/General/Button';
+import Button from '@app/common/General/Button';
 const logoImg = require('@app/assets/general/logo.png');
 const facebookImg = require('@app/modules/auth/login/assets/facebook.png');
 const googleImg = require('@app/modules/auth/login/assets/google.png');
 const twitterImg = require('@app/modules/auth/login/assets/twitter.png');
 
 import type {TRootStackParamList} from '@app/types';
-import CheckBox from '@app/components/General/CheckBox';
-import ImageButton from '@app/components/General/ImageButton';
-import TextButton from '@app/components/General/TextButton';
+import CheckBox from '@app/common/General/CheckBox';
+import ImageButton from '@app/common/General/ImageButton';
+import TextButton from '@app/common/General/TextButton';
 import axios from 'axios';
 import {parseErrorMessage} from '@app/utils/parser/login';
 import {useToast} from 'react-native-toast-notifications';

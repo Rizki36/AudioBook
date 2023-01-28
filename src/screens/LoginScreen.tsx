@@ -17,7 +17,7 @@ import axios from 'axios';
 import {parseErrorMessage} from '@app/utils/parser/login';
 import {useToast} from 'react-native-toast-notifications';
 import useLoginMutation from '@app/hooks/mutations/useLoginMutation';
-import deviceStorage from '@app/services/deviceStorage';
+import deviceStorage from '@app/common/services/deviceStorage';
 import {tokenAtom} from '@app/atoms/auth';
 import {useSetAtom} from 'jotai';
 
@@ -43,8 +43,12 @@ const LoginScreen: FC<TProps> = ({}) => {
   const onSubmit = async (data: TFieldValues) => {
     mutate(data, {
       onSuccess: async res => {
-        setToken(res?.data?.token);
-        await deviceStorage.setJWT(res?.data?.token);
+        try {
+          setToken(res?.data?.token);
+          await deviceStorage.setJWT(res?.data?.token);
+        } catch (error) {
+          console.error(error);
+        }
       },
       onError: error => {
         if (axios.isAxiosError(error)) {
